@@ -1,0 +1,261 @@
+# db.<col_name>.find("field.nestedField")
+
+> db.stud.find().pretty()
+    {
+        "_id" : ObjectId("61f404ec757d2e4effd2b103"),
+        "id" : 1,
+        "name" : "Preet",
+        "marks" : {
+                "maths" : 68,
+                "english" : 87,
+                "science" : 77
+        },
+        "gender" : "Male"   
+    }
+    {
+        "_id" : ObjectId("61f404ec757d2e4effd2b104"),
+        "id" : 2,
+        "name" : "Aarti",
+        "marks" : {
+                "maths" : 89,
+                "english" : 67,
+                "science" : 68
+        },
+        "gender" : "Female"
+    }
+    {
+        "_id" : ObjectId("61f4055c757d2e4effd2b105"),
+        "id" : 3,
+        "name" : "Rashi",
+        "marks" : {
+                "maths" : 78,
+                "english" : 56,
+                "science" : 71
+        },
+        "gender" : "Female"
+    }
+    {
+        "_id" : ObjectId("61f4055c757d2e4effd2b106"),
+        "id" : 4,
+        "name" : "Kiran",
+        "marks" : {
+                "maths" : 69,
+                "english" : 71,
+                "science" : 56
+        },
+        "gender" : "Female"
+    }
+    {
+        "_id" : ObjectId("61f405ac757d2e4effd2b107"),
+        "id" : 5,
+        "name" : "Rahul",
+        "marks" : {
+                "maths" : 58,
+                "english" : 69,
+                "science" : 91
+        },
+        "gender" : "Male"
+    }
+    {
+        "_id" : ObjectId("61f405ac757d2e4effd2b108"),
+        "id" : 6,
+        "name" : "Mohan",
+        "marks" : {
+                "maths" : 79,
+                "english" : 82,
+                "science" : 76
+        },
+        "gender" : "Male"
+    }
+
+# find students whose marks in maths are geater than 70
+> db.stud.find({'marks.maths' : {$gt:70}}).pretty()
+    {
+        "_id" : ObjectId("61f404ec757d2e4effd2b104"),
+        "id" : 2,
+        "name" : "Aarti",
+        "marks" : {
+                "maths" : 89,
+                "english" : 67,
+                "science" : 68
+        },
+        "gender" : "Female"
+    }
+    {
+        "_id" : ObjectId("61f4055c757d2e4effd2b105"),
+        "id" : 3,
+        "name" : "Rashi",
+        "marks" : {
+                "maths" : 78,
+                "english" : 56,
+                "science" : 71
+        },
+        "gender" : "Female"
+    }
+    {
+        "_id" : ObjectId("61f405ac757d2e4effd2b108"),
+        "id" : 6,
+        "name" : "Mohan",
+        "marks" : {
+                "maths" : 79,
+                "english" : 82,
+                "science" : 76
+        },
+        "gender" : "Male"
+    }
+
+# find students whose marks in maths are geater than 70 and marks in english are geater than 60
+> db.stud.find({'marks.maths' : {$gt:70}, 'marks.english' :{$gt: 60}},{_id:0}).pretty()
+    {
+        "id" : 2,
+        "name" : "Aarti",
+        "marks" : {
+                "maths" : 89,
+                "english" : 67,
+                "science" : 68
+        },
+        "gender" : "Female"
+    }
+    {
+        "id" : 6,
+        "name" : "Mohan",
+        "marks" : {
+                "maths" : 79,
+                "english" : 82,
+                "science" : 76
+        },
+        "gender" : "Male"
+    }
+
+# find students whose gender is 'Male' and marks in maths are less than 70 
+> db.stud.find({$and:[{gender:'Male'},{'marks.maths':{$lt:70}}]},{_id:0}).pretty()
+    {
+        "id" : 1,
+        "name" : "Preet",
+        "marks" : {
+                "maths" : 68,
+                "english" : 87,
+                "science" : 77
+        },
+        "gender" : "Male"
+    }
+    {
+        "id" : 5,
+        "name" : "Rahul",
+        "marks" : {
+                "maths" : 58,
+                "english" : 69,
+                "science" : 91
+        },
+        "gender" : "Male"
+    }
+
+
+# find students whose gender is 'Male' or marks in maths are less than 70 
+> db.stud.find({$or:[{gender:'Male'},{'marks.maths':{$lt:70}}]},{_id:0}).pretty()
+    {
+        "id" : 1,
+        "name" : "Preet",
+        "marks" : {
+                "maths" : 68,
+                "english" : 87,
+                "science" : 77
+        },
+        "gender" : "Male"
+    }
+    {
+        "id" : 4,
+        "name" : "Kiran",
+        "marks" : {
+                "maths" : 69,
+                "english" : 71,
+                "science" : 56
+        },
+        "gender" : "Female"
+    }
+    {
+        "id" : 5,
+        "name" : "Rahul",
+        "marks" : {
+                "maths" : 58,
+                "english" : 69,
+                "science" : 91
+        },
+        "gender" : "Male"
+    }
+    {
+        "id" : 6,
+        "name" : "Mohan",
+        "marks" : {
+                "maths" : 79,
+                "english" : 82,
+                "science" : 76
+        },
+        "gender" : "Male"
+    }
+
+# find students whose gender is 'Female' or marks in maths are geater than 80 
+> db.stud.find({$or:[{gender:'Female'},{'marks.maths':{$gt:80}}]},{_id:0}).pretty()
+    {
+        "id" : 2,
+        "name" : "Aarti",
+        "marks" : {
+                "maths" : 89,
+                "english" : 67,
+                "science" : 68
+        },
+        "gender" : "Female"
+    }
+    {
+        "id" : 3,
+        "name" : "Rashi",
+        "marks" : {
+                "maths" : 78,
+                "english" : 56,
+                "science" : 71
+        },
+        "gender" : "Female"
+    }
+    {
+        "id" : 4,
+        "name" : "Kiran",
+        "marks" : {
+                "maths" : 69,
+                "english" : 71,
+                "science" : 56
+        },
+        "gender" : "Female"
+    }
+
+# find students whose gender is 'Male'. Exclude fields - _id,id,gender,marks.maths
+> db.stud.find({gender:'Male'},{_id:0,id:0,gender:0,'marks.maths':0})
+    { "name" : "Preet", "marks" : { "english" : 87, "science" : 77 } }
+    { "name" : "Rahul", "marks" : { "english" : 69, "science" : 91 } }
+    { "name" : "Mohan", "marks" : { "english" : 82, "science" : 76 } }
+
+# find students whose gender is 'Male'.Exclude(gender,marks.maths,marks.english) Include(_id,id,name,marks.science)
+> db.stud.find({gender:'Male'},{name:1,id:1,'marks.science':1}).pretty()
+    {
+        "_id" : ObjectId("61f404ec757d2e4effd2b103"),
+        "id" : 1,
+        "name" : "Preet",
+        "marks" : {
+                "science" : 77
+        }
+    }
+    {
+        "_id" : ObjectId("61f405ac757d2e4effd2b107"),
+        "id" : 5,
+        "name" : "Rahul",
+        "marks" : {
+                "science" : 91
+        }
+    }
+    {
+        "_id" : ObjectId("61f405ac757d2e4effd2b108"),
+        "id" : 6,
+        "name" : "Mohan",
+        "marks" : {
+                "science" : 76
+        }
+    }

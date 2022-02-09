@@ -1,0 +1,60 @@
+db.movies.aggregate([{$match:{name:'Hero'}}])
+{ "_id" : ObjectId("61f3b02e0187b8bd0d7c5d8f"), "id" : 1, "name" : "Hero", "cost" : 150 }
+
+
+db.movies.aggregate([{$group:{_id:'$cost'}}])
+{ "_id" : 150 }
+{ "_id" : 180 }
+{ "_id" : 200 }
+{ "_id" : 250 }
+{ "_id" : 270 }
+{ "_id" : 300 }
+
+
+db.movies.aggregate([{ $group : {_id:'$cost' , totalCount : {$sum:1} }}])
+{ "_id" : 150, "totalCount" : 2 }
+{ "_id" : 300, "totalCount" : 2 }
+{ "_id" : 200, "totalCount" : 1 }
+{ "_id" : 180, "totalCount" : 2 }
+{ "_id" : 270, "totalCount" : 2 }
+{ "_id" : 250, "totalCount" : 3 }
+
+ db.movies.aggregate([{$match:{cost:250}},{$sort:{name:-1}}]).pretty()
+{
+        "_id" : ObjectId("61f3b06e0187b8bd0d7c5d97"),
+        "id" : 9,
+        "name" : "Mission Mangal",
+        "cost" : 250
+}
+{
+        "_id" : ObjectId("61f3b06e0187b8bd0d7c5d91"),
+        "id" : 3,
+        "name" : "Dangal",
+        "cost" : 250
+}
+{
+        "_id" : ObjectId("61f3b1530187b8bd0d7c5d9a"),
+        "id" : 12,
+        "name" : "Bell Bottom",
+        "cost" : 250
+}
+
+db.movies.aggregate([{$match:{cost:250}}]).pretty()
+{
+        "_id" : ObjectId("61f3b1530187b8bd0d7c5d9a"),
+        "id" : 12,
+        "name" : "Bell Bottom",
+        "cost" : 250
+}
+{
+        "_id" : ObjectId("61f3b06e0187b8bd0d7c5d91"),
+        "id" : 3,
+        "name" : "Dangal",
+        "cost" : 250
+}
+{
+        "_id" : ObjectId("61f3b06e0187b8bd0d7c5d97"),
+        "id" : 9,
+        "name" : "Mission Mangal",
+        "cost" : 250
+}

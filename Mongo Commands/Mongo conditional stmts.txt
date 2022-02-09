@@ -1,0 +1,140 @@
+QUERY OPERATORS : { <field1>: { <operator1>: <value1> }, ... }
+
+#  EQUALITY : {<key>:{$eq:<value>}} OR {<key>:<value>} 
+    db.user.find({u_id:{$eq:105}}).pretty()
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+    }
+
+    db.user.find({u_id:105}).pretty()
+    {
+         "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+    }
+
+#  LESS THAN : {<key>:{$lt:<value>}}
+    db.user.find({class:{$lt:10}}).pretty()
+    {
+        "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+        "u_id" : 102,
+        "u_name" : "Kirti",
+        "age" : 16,
+        "class" : 9
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+        "u_id" : 103,
+        "u_name" : "Samar",
+        "age" : 12,
+        "class" : 7
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+        "u_id" : 104,
+        "u_name" : "Chetna",
+        "age" : 15,
+        "class" : 8
+    }
+
+# GREATER THAN : {<key>:{$gt:<value>}}
+    db.user.find({class:{$gt:10}}).pretty()
+    {
+        "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+        "u_id" : 101,
+        "u_name" : "Amar",
+        "age" : 17,
+        "class" : 11
+    }
+
+# LESS THAN EQUALS : {<key>:{$lte:<value>}}
+    db.user.find({class:{$lte:8}}).pretty()
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+        "u_id" : 103,
+        "u_name" : "Samar",
+        "age" : 12,
+        "class" : 7
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+        "u_id" : 104,
+        "u_name" : "Chetna",
+        "age" : 15,
+        "class" : 8
+    }
+
+# GREATER THAN EQUALS : {<key>:{$gte:<value>}}
+    db.user.find({class:{$gte:10}}).pretty()
+    {
+        "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+        "u_id" : 101,
+        "u_name" : "Amar",
+        "age" : 17,
+        "class" : 11
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+    }
+
+# NOT EQUALS : {<key>:{$ne:<value>}}
+    db.user.find({age:{$ne:17}}).pretty()
+    {
+        "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+        "u_id" : 102,
+        "u_name" : "Kirti",
+        "age" : 16,
+        "class" : 9
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+        "u_id" : 103,
+        "u_name" : "Samar",
+        "age" : 12,
+        "class" : 7
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+        "u_id" : 104,
+        "u_name" : "Chetna",
+        "age" : 15,
+        "class" : 8
+    }
+
+# VALUES IN AN ARRAY : {<key>:{$in:[<value1>, <value2>,……<valueN>]}}
+    db.user.find({age:{$in:[14,15,16]}}).pretty()
+    {
+        "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+        "u_id" : 102,
+        "u_name" : "Kirti",
+        "age" : 16,
+        "class" : 9
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+        "u_id" : 104,
+        "u_name" : "Chetna",
+        "age" : 15,
+        "class" : 8
+    }
+
+# VALUES NOT IN AN ARRAY : {<key>:{$nin:[<value1>, <value2>,……<valueN>]}}
+     db.user.find({age:{$nin:[14,15,16,17]}}).pretty()
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+        "u_id" : 103,
+        "u_name" : "Samar",
+        "age" : 12,
+        "class" : 7
+    }
+

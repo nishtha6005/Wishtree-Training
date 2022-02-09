@@ -1,0 +1,100 @@
+# AND OPERATION : { $and: [ {<key1>:<value1>}, { <key2>:<value2>} ] }
+    db.user.find({$and:[{age:17},{class:10}]}).pretty()
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+    }
+
+# OR OPERATION : { $or: [ {<key1>:<value1>}, { <key2>:<value2>} ] }
+    db.user.find({$or:[{age:17},{class:10},{u_id:104}]}).pretty()
+    {
+        "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+        "u_id" : 101,
+        "u_name" : "Amar",
+        "age" : 17,
+        "class" : 11
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+        "u_id" : 104,
+        "u_name" : "Chetna",
+        "age" : 15,
+        "class" : 8
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+    }
+
+# NOT OPERATION : { $not : [ {<key1>:<value1>}, { <key2>:<value2>} ] }
+    db.user.find({age:{$not:{$gte:15}}}).pretty()
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+        "u_id" : 103,
+        "u_name" : "Samar",
+        "age" : 12,
+        "class" : 7
+    }
+
+    db.user.find({age:{$not:{$eq:17}}}).pretty()
+    {
+        "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+        "u_id" : 102,
+        "u_name" : "Kirti",
+        "age" : 16,
+        "class" : 9
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+        "u_id" : 103,
+        "u_name" : "Samar",
+        "age" : 12,
+        "class" : 7
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+        "u_id" : 104,
+        "u_name" : "Chetna",
+        "age" : 15,
+        "class" : 8
+    }
+
+
+# AND - OR COMBINED OPERATION
+    db.user.find({age:{$gt:15}, $or:[{class:{$lt:11}}]}).pretty()
+    {
+        "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+        "u_id" : 102,
+        "u_name" : "Kirti",
+        "age" : 16,
+        "class" : 9
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+    }
+
+    db.user.find({$and:[{age:{$gt:15}, $or:[{class:{$lt:11}}]}]}).pretty()
+    {
+        "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+        "u_id" : 102,
+        "u_name" : "Kirti",
+        "age" : 16,
+        "class" : 9
+    }
+    {
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+    }

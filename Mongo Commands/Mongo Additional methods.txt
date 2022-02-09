@@ -1,0 +1,141 @@
+LIMIT() METHOD
+    # db.COLLECTION_NAME.find().limit(NUMBER) : to limit the number of documents to be displayed. 
+    If you don't specify the number argument in limit() method then it will display all documents from the collection.
+        db.user.find().limit(2).pretty()
+        {
+            "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+            "u_id" : 101,
+            "u_name" : "Amar",
+            "age" : 17,
+            "class" : 11
+        }
+        {
+            "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+            "u_id" : 102,
+            "u_name" : "Kirti",
+            "age" : 16,
+            "class" : 9
+        }
+
+SKIP METHOD()
+	#db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER) : to skip the number of documents specified
+	db.user.find().limit(2).skip(2).pretty()
+	{
+		"_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+		"u_id" : 103,
+		"u_name" : "Samar",
+		"age" : 12,
+		"class" : 7
+	}
+	{
+		"_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+		"u_id" : 104,
+		"u_name" : "Chetna",
+		"age" : 15,
+		"class" : 8
+	}
+
+	db.user.find().skip(3).pretty()
+	{
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+        "u_id" : 104,
+        "u_name" : "Chetna",
+        "age" : 15,
+        "class" : 8
+	}
+	{
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+	}
+
+	db.user.find().skip(4).pretty()
+	{
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+	}
+
+SORT METHOD()
+	# db.COLLECTION_NAME.find().sort({KEY:1}) : KEY 1 indicates ascending order and -1 indicates descending order
+	# Ascending Order
+	db.user.find().sort({class:1}).pretty() 	
+	{
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+        "u_id" : 103,
+        "u_name" : "Samar",
+        "age" : 12,
+        "class" : 7
+	}
+	{
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+        "u_id" : 104,
+        "u_name" : "Chetna",
+        "age" : 15,
+        "class" : 8
+	}
+	{
+        "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+        "u_id" : 102,
+        "u_name" : "Kirti",
+        "age" : 16,
+        "class" : 9
+	}
+	{
+        "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+        "u_id" : 105,
+        "u_name" : "Shreya",
+        "age" : 17,
+        "class" : 10
+	}
+	{
+        "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+        "u_id" : 101,
+        "u_name" : "Amar",
+        "age" : 17,
+        "class" : 11
+	}
+
+	# Descending Order
+	db.user.find({},{_id:0,age:0}).sort({class:-1}).pretty()
+	{ "u_id" : 101, "u_name" : "Amar", "class" : 11 }
+	{ "u_id" : 105, "u_name" : "Shreya", "class" : 10 }
+	{ "u_id" : 102, "u_name" : "Kirti", "class" : 9 }
+	{ "u_id" : 104, "u_name" : "Chetna", "class" : 8 }
+	{ "u_id" : 103, "u_name" : "Samar", "class" : 7 }
+
+
+REGEX EXPRESSION
+      # db.COLLECTION_NAME.find({<key> :{$regex :<value>, $options:$i}})  : For case insensitive values
+      # db.COLLECTION_NAME.find({<key> :/<value>/})
+        > db.student.find({gender:{$regex:'Male'}},{_id:0,marks:0}).pretty()
+        { "id" : 102, "name" : "Yash", "city" : "Delhi", "gender" : "Male" }
+        { "id" : 103, "name" : "Shreyas", "city" : "Pune", "gender" : "Male" }
+        { "id" : 104, "name" : "Aman", "city" : "Jaipur", "gender" : "Male" }
+        { "id" : 106, "name" : "Hitesh", "city" : "Pune", "gender" : "Male" }
+        { "id" : 107, "name" : "Shaan", "city" : "Delhi", "gender" : "Male" }
+        { "id" : 108, "name" : "Rahul", "city" : "Jaipur", "gender" : "Male" }
+        { "id" : 110, "name" : "Harsh", "city" : "Delhi", "gender" : "Male" }
+
+        # find all students whose name starts with H (case sensitive)
+        > db.student.find({name:{$regex:'^H'}},{_id:0,marks:0}).pretty()
+        { "id" : 106, "name" : "Hitesh", "city" : "Pune", "gender" : "Male" }
+        { "id" : 109, "name" : "Hiral", "city" : "Delhi", "gender" : "Female" }
+        { "id" : 110, "name" : "Harsh", "city" : "Delhi", "gender" : "Male" }
+
+        # find all students whose name starts with h (case insensitive)
+        > db.student.find({name:{$regex:'^h',$options:'$i'}},{_id:0,marks:0}).pretty() 
+                        OR
+        > db.student.find({name:/^h/i},{_id:0,marks:0}).pretty()
+        { "id" : 106, "name" : "Hitesh", "city" : "Pune", "gender" : "Male" }
+        { "id" : 109, "name" : "Hiral", "city" : "Delhi", "gender" : "Female" }
+        { "id" : 110, "name" : "Harsh", "city" : "Delhi", "gender" : "Male" }
+
+
+# Object.keys(db.myCollection.findOne()) : to find structure of document
+        Object.keys(db.user.findOne())
+        [ "_id", "u_id", "u_name", "age", "class" ]

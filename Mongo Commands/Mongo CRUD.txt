@@ -1,0 +1,221 @@
+CREATE, DROP & SHOW DATABASE COMMANDS
+    # show databases or show dbs : to list all the databases
+        show databases
+        admin   0.000GB
+        config  0.000GB
+        local   0.000GB
+
+        show dbs
+        admin   0.000GB
+        config  0.000GB
+        local   0.000GB
+
+    # use <db_name> : to create databases
+        use student
+        switched to db student
+
+    # db : to check current database
+        db
+        student
+
+    # db.dropDatabase() : to delete the current selected database
+        db.dropDatabase()
+        { "ok" : 1 }
+
+
+CREATE, DROP & SHOW COLLECTION COMMANDS
+    # db.createCollection(<col_name>) : to create collection
+        db.createCollection('user')
+        { "ok" : 1 }
+
+    # show collections : to list all the collections in current database
+        show collections
+        user
+
+    # db.<col_name>.drop() : to drop a collection from the database. drop() method will return true, if the selected collection is dropped successfully, otherwise it will return false.
+        db.user.drop()
+        true
+
+
+INSERT DOCUMENT COMMANDS
+    # _id is 12 bytes hexadecimal number unique for every document in a collection
+
+    # db.<col_name>.insert() : to insert single or multiple (array of documemnts) documents into collection
+        db.user.insert({u_id:101,u_name:'Amar', age:17, class:5})
+        WriteResult({ "nInserted" : 1 })
+
+        db.user.insert([{u_id:106,u_name:"Mukul",age:10,class:5},{u_id:107,u_name:"Preet",age:14,class:6}])
+        BulkWriteResult({
+                "writeErrors" : [ ],
+                "writeConcernErrors" : [ ],
+                "nInserted" : 2,
+                "nUpserted" : 0,
+                "nMatched" : 0,
+                "nModified" : 0,
+                "nRemoved" : 0,
+                "upserted" : [ ]
+        })
+
+    # db.<col_name>.insertOne() :  to insert only one document into a collection
+        db.user.insertOne({u_id:102,u_name:'Kirti', age:16, class:9})
+        {
+            "acknowledged" : true,
+            "insertedId" : ObjectId("61f2cbcd757d2e4effd2b0fd")
+        }
+
+    #  db.<col_name>.insertMany() : to insert multiple documents into a collection. We need to pass an array of documents to this method
+        db.user.insertMany([{u_id:103,u_name:'Samar', age:12, class:7},{u_id:104,u_name:'Chetna',age:15,class:8},{u_id:105,u_name:'Shreya',age:17,class:11}])
+        {
+            "acknowledged" : true,
+                "insertedIds" : [
+                ObjectId("61f2cdb4757d2e4effd2b0fe"),
+                ObjectId("61f2cdb4757d2e4effd2b0ff"),
+                ObjectId("61f2cdb4757d2e4effd2b100")
+            ]
+        }
+
+
+QUERY DOCUMENT COMMANDS
+    #  db.<col_name>.find() : to display all the documents of a collection in a non-structured way
+            db.user.find()
+            { "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"), "u_id" : 101, "u_name" : "Amar", "age" : 17, "class" : 5 }
+            { "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"), "u_id" : 102, "u_name" : "Kirti", "age" : 16, "class" : 9 }
+            { "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"), "u_id" : 103, "u_name" : "Samar", "age" : 12, "class" : 7 }
+            { "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"), "u_id" : 104, "u_name" : "Chetna", "age" : 15, "class" : 8 }
+            { "_id" : ObjectId("61f2cdb4757d2e4effd2b100"), "u_id" : 105, "u_name" : "Shreya", "age" : 17, "class" : 11 }
+
+            db.user.find({age:17}).pretty()
+            {
+                    "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+                    "u_id" : 101,
+                    "u_name" : "Amar",
+                    "age" : 17,
+                    "class" : 5
+            }
+            {
+                    "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+                    "u_id" : 105,
+                    "u_name" : "Shreya",
+                    "age" : 17,
+                    "class" : 11
+            }
+
+    #  db.<col_name>.find().pretty() : to display all the documents of a collection in a formatted way
+            db.user.find().pretty()
+            {
+                    "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+                    "u_id" : 101,
+                    "u_name" : "Amar",
+                    "age" : 17,
+                    "class" : 5
+            }
+            {
+                    "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+                    "u_id" : 102,
+                    "u_name" : "Kirti",
+                    "age" : 16,
+                    "class" : 9
+            }
+            {
+                    "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+                    "u_id" : 103,
+                    "u_name" : "Samar",
+                    "age" : 12,
+                    "class" : 7
+            }
+            {
+                    "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+                    "u_id" : 104,
+                    "u_name" : "Chetna",
+                    "age" : 15,
+                    "class" : 8
+            }
+            {
+                    "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+                    "u_id" : 105,
+                    "u_name" : "Shreya",
+                    "age" : 17,
+                    "class" : 11
+            }
+
+    #  db.<col_name>.findOne() : this method returns only one document
+            db.user.findOne()
+            {
+                    "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+                    "u_id" : 101,
+                    "u_name" : "Amar",
+                    "age" : 17,
+                    "class" : 5
+            }
+
+            db.user.findOne({class:7})  # to return the document with class=7
+            {
+                    "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+                    "u_id" : 103,
+                    "u_name" : "Samar",
+                    "age" : 12,
+                    "class" : 7
+            }
+
+UPDATE DOCUMENT COMMANDS
+    #db.<col_name>.updateOne(<filter>,<update>) : to update a single document which matches the given filter
+    # by default update() method updates  a single document    
+        db.user.update({u_id:101},{$set:{class:10}})   
+        WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+        db.user.updateOne({age:17},{$set:{class:9}})
+        { "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+    #db.<col_name>.updateMany(<filter>,<update>) : to update all the documents that matches the given filter
+        db.user.updateMany({age:{$gt:16}},{$set:{class:10}})
+        { "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+
+DELETE DOCUMENT COMMANDS
+    # db.<col_name>.remove(<filter>) : Delete a single document or all documents that match a specified filter.
+
+    # db.<col_name>.deleteOne(<filter>) : Delete at most a single document that match a specified filter even though multiple documents may 
+                                          match the specified filter.
+
+    # db.<col_name>.deleteMany(<filter>) : Delete all documents that matches the specified filter
+
+
+PROJECTION : In MongoDB, projection means selecting only the necessary data rather than selecting whole of the data of a document. 
+If a document has 5 fields and you need to show only 3, then select only 3 fields from them.
+In MongoDB, when you execute find() method, then it displays all fields of a document. 
+To limit this, you need to set a list of fields with value 1 or 0. 1 is used to show the field while 0 is used to hide the fields.
+
+        # Inclusion projection
+        db.user.find({},{_id:1,u_id:1,age:0.1}).pretty()  
+        { "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"), "u_id" : 101, "age" : 17 }
+        { "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"), "u_id" : 102, "age" : 16 }
+        { "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"), "u_id" : 103, "age" : 12 }
+        { "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"), "u_id" : 104, "age" : 15 }
+        { "_id" : ObjectId("61f2cdb4757d2e4effd2b100"), "u_id" : 105, "age" : 17 }
+
+        # Exclusion projection
+        db.user.find({},{u_id:0,age:0}).pretty()        
+        {
+            "_id" : ObjectId("61f2cb00757d2e4effd2b0fc"),
+            "u_name" : "Amar",
+            "class" : 11
+        }
+        {
+            "_id" : ObjectId("61f2cbcd757d2e4effd2b0fd"),
+            "u_name" : "Kirti",
+            "class" : 9
+        }
+        {
+            "_id" : ObjectId("61f2cdb4757d2e4effd2b0fe"),
+            "u_name" : "Samar",
+            "class" : 7
+        }
+        {
+            "_id" : ObjectId("61f2cdb4757d2e4effd2b0ff"),
+            "u_name" : "Chetna",
+            "class" : 8
+        }
+        {
+            "_id" : ObjectId("61f2cdb4757d2e4effd2b100"),
+            "u_name" : "Shreya",
+            "class" : 10
+        }

@@ -1,0 +1,138 @@
+> use Students
+switched to db Students
+
+> db.createCollection('student')
+{ "ok" : 1 }
+
+> db.student.insert( 
+    [
+        {id:101,name:'Payal',marks:78,city:'Pune',gender:'Female'},
+        {id:102,name:'Yash',marks:87,city:'Delhi',gender:'Male'},
+        {id:103,name:'Shreyas',marks:58,city:'Pune',gender:'Male'},
+        {id:104,name:'Aman',marks:52,city:'Jaipur',gender:'Male'},
+        {id:105,name:'Ankita',marks:59,city:'Delhi',gender:'Female'},
+        {id:106,name:'Hitesh',marks:75,city:'Pune',gender:'Male'},
+        {id:107,name:'Shaan',marks:85,city:'Delhi',gender:'Male'},
+        {id:108,name:'Rahul',marks:67,city:'Jaipur',gender:'Male'},
+        {id:109,name:'Hiral',marks:59,city:'Delhi',gender:'Female'},
+        {id:110,name:'Harsh',marks:77,city:'Delhi',gender:'Male'}
+    ] )
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" :10,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+
+> db.student.find().pretty()
+{
+        "_id" : ObjectId("61f3f2cd90597878340d5a19"),
+        "id" : 101,
+        "name" : "Payal",
+        "marks" : 78,
+        "city" : "Pune",
+        "gender" : "Female"
+}
+{
+        "_id" : ObjectId("61f3f2cd90597878340d5a1a"),
+        "id" : 102,
+        "name" : "Yash",
+        "marks" : 87,
+        "city" : "Delhi",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("61f3f3c890597878340d5a1b"),
+        "id" : 103,
+        "name" : "Shreyas",
+        "marks" : 58,
+        "city" : "Pune",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("61f3f3c890597878340d5a1c"),
+        "id" : 104,
+        "name" : "Aman",
+        "marks" : 52,
+        "city" : "Jaipur",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("61f3f3c890597878340d5a1d"),
+        "id" : 105,
+        "name" : "Ankita",
+        "marks" : 59,
+        "city" : "Delhi",
+        "gender" : "Female"
+}
+{
+        "_id" : ObjectId("61f3f3c890597878340d5a1e"),
+        "id" : 106,
+        "name" : "Hitesh",
+        "marks" : 75,
+        "city" : "Pune",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("61f3f4ac90597878340d5a1f"),
+        "id" : 107,
+        "name" : "Shaan",
+        "marks" : 85,
+        "city" : "Delhi",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("61f3f4ac90597878340d5a20"),
+        "id" : 108,
+        "name" : "Rahul",
+        "marks" : 67,
+        "city" : "Jaipur",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("61f3f4ac90597878340d5a21"),
+        "id" : 109,
+        "name" : "Hiral",
+        "marks" : 59,
+        "city" : "Delhi",
+        "gender" : "Female"
+}
+{
+        "_id" : ObjectId("61f3f4ac90597878340d5a22"),
+        "id" : 110,
+        "name" : "Harsh",
+        "marks" : 77,
+        "city" : "Delhi",
+        "gender" : "Male"
+}
+
+
+# Q1. Find out number of students for each marks
+>  db.student.aggregate([{$group: {_id:'$marks', totalCount:{$sum:1}}}]).pretty()
+        { "_id" : 78, "totalCount" : 1 }
+        { "_id" : 85, "totalCount" : 1 }
+        { "_id" : 58, "totalCount" : 1 }
+        { "_id" : 87, "totalCount" : 1 }
+        { "_id" : 52, "totalCount" : 1 }
+        { "_id" : 59, "totalCount" : 2 }
+        { "_id" : 75, "totalCount" : 1 }
+        { "_id" : 67, "totalCount" : 1 }
+        { "_id" : 77, "totalCount" : 1 }
+
+# Q2. Find out student count for each city
+> db.student.aggregate([{$group: {_id:'$city', totalCount:{$sum:1}}}]).pretty()
+        { "_id" : "Delhi", "totalCount" : 5 }
+        { "_id" : "Jaipur", "totalCount" : 2 }
+        { "_id" : "Pune", "totalCount" : 3 }
+
+# Q3. Find out sum of all students marks
+> db.student.aggregate([{$group:{_id:'',totalMark:{$sum:'$marks'}}}])
+        { "_id" : "", "totalMark" : 697 }
+
+# Q4. Find out student count who got marks>60
+> db.student.count({marks:{$gt:60}})
+        6
