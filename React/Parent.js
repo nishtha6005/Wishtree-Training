@@ -5,12 +5,12 @@ export class Parent extends Component {
     constructor(props) {
       super(props);
       this.state = {Counter:0};
-      console.log("Display .... constructor");
+      console.log("Parent .... constructor");
     }
     componentDidMount()
     {
         // calling api
-        console.log("Display .... componentDidMount");
+        console.log("Parent .... componentDidMount");
     }
     onCounter = ()=>{
         let { Counter } = this.state;
@@ -24,10 +24,10 @@ export class Parent extends Component {
     }
     componentDidUpdate()
     {
-        console.log("Display ... componentDidUpdate");
+        console.log("Parent ... componentDidUpdate");
     }
   render() {
-    console.log("Display ... Render");
+    console.log("Parent ... Render");
     let { Counter,showChild } = this.state;
     return(
             <>

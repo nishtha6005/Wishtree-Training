@@ -1,0 +1,16 @@
+{"user":[
+	{"id":1, "username":"Arushi","password":"1234","status":"inactive","cityId":1},
+	{"id":2, "username":"Kiran","password":"1234","status":"active","cityId":3},
+	{"id":3, "username":"Kunal","password":"1234","status":"inactive","cityId":2},
+	{"id":4, "username":"Preet","password":"1234","status":"active","cityId":3},
+	{"id":5, "username":"Hiral","password":"1234","status":"inactive","cityId":1},
+	{"id":6, "username":"Khush","password":"1234","status":"active","cityId":2}
+],
+"City":[
+	{"id":1,"cityName":"Pune"},
+	{"id":2,"cityName":"Mumbai"},
+	{"id":3,"cityName":"Jaipur"}
+]	
+
+
+}

@@ -59,26 +59,14 @@ function ProductCrud() {
         setShowDelete(false)
     }
 
-//    const deleteProduct=(rowIndex)=> {
-//        let res = window.confirm("Are you sure you want to delete ? ");
-//        if (res === true)
-//         {
-//             let x = productData.splice(rowIndex,1)
-//             setProductData(productData)
-//             productData.length === 0 ? setProductCode(101) : 
-//         setProductCode(productData[productData.length - 1].productCode + 1)   
-//         }
-
-//    }
-
   return (
     <>
     {showDelete &&
-      <div className=" m-1 p-2 text-center">
+        <div className=" m-1 p-2 text-center">
             <h1>Are you sure delete this record</h1>
             <button className='btn btn-danger px-3 m-1' onClick={onDeleteYes}>Yes</button>
             <button className='btn btn-secondary px-3 m-1' onClick={onDeleteNo} >No</button>
-                </div> }
+        </div> }
     <div className="row">
     <div className="col-md-4 ">
         <form method="Post" onSubmit={addProduct} >

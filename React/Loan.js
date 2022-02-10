@@ -11,7 +11,6 @@ function Loan() {
     <div className="row">
         <div className="col-md-4 border border-dark border-2  my-5 mx-auto p-3 text-center">
             <h3 > Interest Calculator</h3>
-            {/* <h5> Total amount {interest*12} </h5> */}
             <h5> Monthly installment : {interest} </h5> 
             <div className="form-group m-3">
                 <input type='text' className="form-control"  placeholder="Enter Principal Amount" onChange={(e)=>setAmount(parseFloat(e.target.value))}/>

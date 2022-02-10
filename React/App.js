@@ -1,28 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
-import Form from './Form';
-import Filter from './Filter';
 
-import User from './User';
-import EmployeeApi from './EmployeeApi';
-import TableFunction from './TableFunction';
-import Crud from './Crud';
-import CrudFunction from './CrudFunction';
+import EmployeeApiPost from './EmployeeApiPost';
 
-import ProductCrud from './ProductCrud';
+import EmployeeApiGet from './EmployeeApiGet';
 
-import FormCss from './FormCss';
 
-// import Spread from './Spread';
+import EmployeeApiDelete from './EmployeeApiDelete';
+
+import EmployeeApiPut from './EmployeeApiPut';
+import EmployeeApiPutGrid from './EmployeeApiPutGrid';
+
+import VendorCrud from './VendorCrud';
 
 import Loan from './Loan';
 function App(props) {
   return (
     <>
-    <EmployeeApi/>
+    <EmployeeApiPutGrid/>
+    <hr/>
+    <EmployeeApiPut/>
+    <hr/>
+    <VendorCrud/>
+
+    {/* <EmployeeApiDelete/> */}
+    {/* <EmployeeApiPost/> */}
+    {/* <EmployeeApiGet/> */}
     {/* <ProductCrud/> */}
     {/* <CrudFunction/> */}
-    {/* <Crud/> */}
+    {/* <CrudClass/> */}
     {/* <FormCss/> */}
      {/* <Form/> */}
      {/* <h1 className='text-center'>CRUD Operations</h1>

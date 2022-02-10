@@ -46,10 +46,7 @@ class Form extends Component{
                     onChange={this.onChangeHandler}/>
                 </div>
                 <button className="btn btn-primary" >Submit</button>
-            </form>
-           
-            
-            
+            </form>            
             </>
         )
     }

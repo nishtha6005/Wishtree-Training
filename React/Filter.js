@@ -24,10 +24,6 @@ class Filter extends Component {
 
     OnFilterHandler=(Type)=>{
         let { ClientData, TempData } = this.state;
-        // ClientData = TempData.filter(item=>{
-        //    return ( Type==='all' ? item.type : item.type === Type);
-        // })
-        // this.setState({ClientData});
         if (Type==='all')
             ClientData=TempData
         else
@@ -40,31 +36,30 @@ class Filter extends Component {
         return(
          <>
          <h2 >Client Data</h2>
-        
          <button className='btn btn-primary m-2' onClick={()=>{this.OnFilterHandler('local')}}>Local</button>
          <button className="btn btn-primary m-2" onClick={()=>{this.OnFilterHandler('central')}}>Central</button>
          <button className="btn btn-primary m-2 " onClick={()=>{this.OnFilterHandler('all')}}>All</button>
          <table className='table table-striped'>
-                    <tbody>
-                        <tr>
-                            <th>Client ID</th>
-                            <th>Client Name</th>
-                            <th>Due Amount</th>
-                            <th>Type</th>
+            <tbody>
+                <tr>
+                    <th>Client ID</th>
+                    <th>Client Name</th>
+                    <th>Due Amount</th>
+                    <th>Type</th>
+                </tr>
+                {ClientData.map((item, idx) => {
+                    return (
+                        <tr key={idx}>
+                            <td>{item.clientId}</td>
+                            <td>{item.clientName}</td>
+                            <td>{item.dueAmount}</td>
+                            <td>{item.type}</td>
                         </tr>
-                        {ClientData.map((item, idx) => {
-                            return (
-                                <tr key={idx}>
-                                    <td>{item.clientId}</td>
-                                    <td>{item.clientName}</td>
-                                    <td>{item.dueAmount}</td>
-                                    <td>{item.type}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-         </>   
+                    )
+                })}
+            </tbody>
+        </table>
+        </>   
         )
     }
 }

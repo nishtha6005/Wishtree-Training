@@ -6,11 +6,10 @@ class Checkbox extends Component{
         this.state = {Checked:false};;
     }
 
+    // To change the checked state of a checkox on button click
     onCheck =() =>{
-        
         let {Checked} = this.state;
         this.setState({Checked:!Checked});
-       // this.setState({Checked:!this.state.Checked});
     }
     
     render(){

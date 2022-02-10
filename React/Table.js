@@ -29,7 +29,6 @@ class Table extends Component{
                         <th> Select</th>
                     </tr>
                     {this.state.UserData.map((value,index) =>{
-
                         return(
                             <tr key={index}>
                                 <td>{value.userid}</td>
@@ -46,7 +45,6 @@ class Table extends Component{
             </>
         )
     }
-
 }
 
 export default Table;

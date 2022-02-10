@@ -6,11 +6,13 @@ class AddButton extends Component{
         this.state = {total:0};
     }
 
+    // To add the values of button which is clicked
     addButton =(value) =>{
         let {total} = this.state;
         total += value;
         this.setState({total});
     }
+    
     render(){
         return(
             <>

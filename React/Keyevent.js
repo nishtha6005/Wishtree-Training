@@ -24,8 +24,8 @@ class Keyevent extends Component{
     render(){
         return(
             <>
-            Firstname : <input type='text' name='name' onKeyDown={this.onKeyDownHandler} onKeyUp={this.onKeyUpHandler}
-                        onKeyPress={this.onKeyPressHandler}/>
+            Firstname : <input type='text' name='name' onKeyDown={this.onKeyDownHandler} 
+                onKeyUp={this.onKeyUpHandler} onKeyPress={this.onKeyPressHandler}/>
             </>
         )
     }

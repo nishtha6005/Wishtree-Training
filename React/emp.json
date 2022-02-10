@@ -1,0 +1,39 @@
+{
+  "Emp": [
+    {
+      "id": 1,
+      "employeeName": "Vijay",
+      "salary": "60000"
+    },
+    {
+      "id": 2,
+      "employeeName": "Manish",
+      "salary": "70000"
+    },
+    {
+      "id": 3,
+      "employeeName": "Ayushi",
+      "salary": "65000"
+    },
+    {
+      "id": 4,
+      "employeeName": "Pankaj",
+      "salary": "5500"
+    },
+    {
+      "id": 5,
+      "employeeName": "Akansha",
+      "salary": 95000
+    },
+    {
+      "id": 6,
+      "employeeName": "Kiran",
+      "salary": "65000"
+    },
+    {
+      "id": 7,
+      "employeeName": "Hitesh",
+      "salary": 70000
+    }
+  ]
+}
