@@ -5,8 +5,14 @@ import EmployeeApiPost from './EmployeeApiPost';
 
 import EmployeeApiGet from './EmployeeApiGet';
 
+import Routing from './Routing/Routing';
 
+import Assignment from './Routing/Assignment';
+
+import Assignment2  from './Routing/Assignment2';
 import EmployeeApiDelete from './EmployeeApiDelete';
+
+import ClientApi from './Routing/ClientApi';
 
 import EmployeeApiPut from './EmployeeApiPut';
 import EmployeeApiPutGrid from './EmployeeApiPutGrid';
@@ -17,12 +23,17 @@ import Loan from './Loan';
 function App(props) {
   return (
     <>
-    <EmployeeApiPutGrid/>
+
+    <Assignment2/>
+    {/* <Assignment/> */}
+    {/* <ClientApi/> */}
+    {/* <EmployeeApiPutGrid/>
     <hr/>
     <EmployeeApiPut/>
     <hr/>
-    <VendorCrud/>
-
+    <VendorCrud/> */}
+    
+    {/* <Routing/> */}
     {/* <EmployeeApiDelete/> */}
     {/* <EmployeeApiPost/> */}
     {/* <EmployeeApiGet/> */}
