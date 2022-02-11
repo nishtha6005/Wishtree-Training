@@ -1,0 +1,22 @@
+{
+  "Vendor": [
+    {
+      "id": 1,
+      "vendorName": "V1",
+      "contactNo": 9948378756,
+      "type": true
+    },
+    {
+      "id": 2,
+      "vendorName": "V2",
+      "contactNo": 9948378756,
+      "type": false
+    },
+    {
+      "id": "3",
+      "vendorName": "V3",
+      "contactNo": "9867564789",
+      "type": true
+    }
+  ]
+}
