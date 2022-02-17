@@ -3,18 +3,18 @@ var mongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017";
 
 // INSERT ONE
-    // mongoClient.connect(url,(err,db)=>{
-    //     if(err)
-    //         throw err
-    //     var dbase = db.db('StudentDB')
-    //     var student = {"id":1,"name":"Aaryan","age":19,"marks":70}
-    //     dbase.collection('student').insertOne(student,(err,res)=>{
-    //         if(err)
-    //             throw err
-    //         console.log('Record inserted')
-    //         db.close();
-    //     })
-    // })
+    mongoClient.connect(url,(err,db)=>{
+        if(err)
+            throw err
+        var dbase = db.db('StudentDB')
+        var student = {"id":1,"name":"Aaryan","age":19,"marks":70}
+        dbase.collection('student').insertOne(student,(err,res)=>{
+            if(err)
+                throw err
+            console.log('Record inserted')
+            db.close();
+        })
+    })
 
 // INSERT MANY
     mongoClient.connect(url,(err,db)=>{
