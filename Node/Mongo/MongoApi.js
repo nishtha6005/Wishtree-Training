@@ -9,7 +9,7 @@ app.listen(8080,()=>{
     console.log('Server is Running !!! ')
 })
 
-// GET REQUEST
+// GET ALL REQUEST
     app.get('/student-list',(req,res)=>{
         mongoClient.connect(url,(err,db)=>{
             if(err) throw err
@@ -22,20 +22,34 @@ app.listen(8080,()=>{
         })
     })
 
+// GET ONE REQUEST
+app.get('/student/:id',(req,res)=>{
+    mongoClient.connect(url,(err,db)=>{
+        if(err) throw err
+        var database = db.db('StudentDB')
+        var query = {id:parseInt(req.params.id)}
+        database.collection('student').find(query,{_id:0,marks:0}).toArray((err,result)=>{
+            if(err) throw err
+            res.send(result);
+            db.close();
+        })
+    })
+})
+
 // POST REQUEST
     app.post('/add-student',(req,res)=>{
         mongoClient.connect(url,(err,db)=>{
             var database = db.db('StudentDB')
             var stud = {
-                "id":5,
-                "name":"Molik",
-                "age":21,
-                "marks":85
+                "id":6,
+                "name":"Myra",
+                "age":20,
+                "marks":87
             }
             database.collection('student').insertOne(stud,(err,result)=>{
                 if(err) throw err
                 console.log(result)
-                res.send(result)
+                res.send('Record Inserted')
                 db.close();
             })
         })
@@ -46,7 +60,7 @@ app.listen(8080,()=>{
         mongoClient.connect(url,(err,db)=>{
             var database = db.db('StudentDB')
             var query={id:parseInt(req.params.id)}
-            var update = {$set:{age:20}}
+            var update = {$set:{age:19}}
             database.collection('student').updateOne(query,update,(err,result)=>{
                 if(err) throw err
                 res.send('Record Updated')
@@ -63,7 +77,10 @@ app.listen(8080,()=>{
             var query = {id:parseInt(req.params.id)}
             database.collection('student').deleteOne(query,(err,result)=>{
                 if(err) throw err
-                res.end('Record Deleted')
+                if(result.deletedCount === 0)
+                    res.send('No such record found')
+                else
+                    res.send('Record Deleted')
                 console.log(result)
                 db.close();
             })
